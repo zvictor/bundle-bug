@@ -1,6 +1,7 @@
 import * as esbuild from 'esbuild';
 import * as path from 'path';
 import * as fs from 'fs';
+import { temporaryFile } from 'tempy'
 
 interface WorkerProperties {
   accountID: string;
@@ -114,6 +115,17 @@ class WorkerRuntime {
             });
           },
         },
+            {
+              name: 'ignore-ws',
+              setup(build) {
+                build.onResolve({ filter: /^isows$/ }, () => {
+                  // create tmp file with content `module.exports = globalThis` and return it
+                  const path = temporaryFile({ extension: '.js' })
+                  fs.writeFileSync(path, 'module.exports = globalThis')
+                  return { path }
+                })
+              },
+            },
       ],
       outfile: target,
       minifyWhitespace: build.minify,
