@@ -1,0 +1,4 @@
+.sst
+.direnv
+dist
+node_modules

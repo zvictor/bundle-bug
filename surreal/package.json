@@ -1,0 +1,11 @@
+{
+  "name": "@bug-report/surreal",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": "true",
+  "dependencies": {
+    "surrealdb": "beta"
+  }
+}
